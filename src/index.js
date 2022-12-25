@@ -53,7 +53,7 @@ app.post("/users", (req, res) => {
 
   users.push(user);
 
-  return res.status(201).json({ menssage: "User created!", user });
+  return res.status(201).json(user);
 });
 
 app.get("/todos", checksExistsUserAccount, (req, res) => {
@@ -75,7 +75,7 @@ app.post("/todos", checksExistsUserAccount, (req, res) => {
   };
 
   user.todos.push(todo);
-  return res.status(201).json({ menssage: "Todo created!", todo });
+  return res.status(201).json(todo);
 });
 
 app.put("/todos/:id", checksExistsUserAccount, getTodoById, (req, res) => {
@@ -86,7 +86,7 @@ app.put("/todos/:id", checksExistsUserAccount, getTodoById, (req, res) => {
   todo.deadline = new Date(deadline);
   todo.update_at = new Date();
 
-  return res.status(201).json({ menssage: "Todo update!", todo });
+  return res.status(201).json(todo);
 });
 
 app.patch(
@@ -97,7 +97,7 @@ app.patch(
     const { todo } = req;
     todo.done = true;
 
-    return res.status(201).json({ menssage: "Todo done!", todo });
+    return res.status(201).json(todo);
   }
 );
 
@@ -107,7 +107,7 @@ app.delete("/todos/:id", checksExistsUserAccount, getTodoById, (req, res) => {
   const indexTodos = user.todos.findIndex((todo) => todo.id === todo.id);
   user.todos.splice(indexTodos, 1);
 
-  return res.status(204).json({ menssage: "Todo deleted", todo });
+  return res.status(204).json(todo);
 });
 
 module.exports = app;
